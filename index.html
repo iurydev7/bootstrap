@@ -9,6 +9,173 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg-color: #f8f9fa;
+        --text-color: #212529;
+        --surface-color: #ffffff;
+        --surface-alt: #e9ecef;
+        --border-color: rgba(0, 0, 0, 0.12);
+        --navbar-bg: rgba(255, 255, 255, 0.96);
+        --input-bg: #ffffff;
+        --input-text: #212529;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.25s ease, color 0.25s ease;
+      }
+
+      body.dark-mode {
+        color-scheme: dark;
+        --bg-color: #111827;
+        --text-color: #f9fafb;
+        --surface-color: #1f2937;
+        --surface-alt: #374151;
+        --border-color: rgba(255, 255, 255, 0.12);
+        --navbar-bg: rgba(17, 24, 39, 0.96);
+        --input-bg: #111827;
+        --input-text: #f9fafb;
+      }
+
+      body,
+      .navbar,
+      .dropdown-menu,
+      .form-control,
+      .btn,
+      .nav-link,
+      .navbar-brand {
+        transition: background-color 0.25s ease, color 0.25s ease,
+          border-color 0.25s ease;
+      }
+
+      body.dark-mode .navbar {
+        background-color: var(--navbar-bg) !important;
+        border-color: var(--border-color);
+      }
+
+      body.dark-mode .navbar-brand,
+      body.dark-mode .nav-link,
+      body.dark-mode .dropdown-item,
+      body.dark-mode .navbar-toggler,
+      body.dark-mode .navbar-toggler-icon {
+        color: var(--text-color) !important;
+      }
+
+      body.dark-mode .dropdown-menu {
+        background-color: var(--surface-color);
+        border-color: var(--border-color);
+      }
+
+      body.dark-mode .dropdown-item:hover,
+      body.dark-mode .dropdown-item:focus {
+        background-color: var(--surface-alt);
+        color: var(--text-color);
+      }
+
+      body.dark-mode .form-control,
+      body.dark-mode .form-control:focus {
+        background-color: var(--input-bg);
+        color: var(--input-text);
+        border-color: var(--border-color);
+        box-shadow: none;
+      }
+
+      body.dark-mode .btn-outline-success {
+        color: #8ce99a;
+        border-color: #8ce99a;
+      }
+
+      body.dark-mode .btn-outline-success:hover {
+        background-color: #198754;
+        color: #ffffff;
+      }
+
+      .theme-toggle {
+        position: fixed;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 72px;
+        height: 38px;
+        padding: 0;
+        border: none;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #dfe7f1, #c8d5e6);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        transition: all 0.25s ease;
+        z-index: 9999;
+      }
+
+      .navbar .d-flex {
+        margin-left: 0 !important;
+        margin-right: 0;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+      }
+
+      .navbar .form-control {
+        width: 220px;
+        min-width: 180px;
+      }
+
+      .navbar-collapse {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .navbar-actions {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        gap: 0.75rem;
+      }
+
+      .theme-toggle::before {
+        content: '☀️';
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        z-index: 2;
+      }
+
+      .theme-toggle::after {
+        content: '';
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        left: 5px;
+        top: 5px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.25s ease, background-color 0.25s ease;
+        z-index: 1;
+      }
+
+      body.dark-mode .theme-toggle {
+        background: linear-gradient(135deg, #1f2937, #0f172a);
+      }
+
+      body.dark-mode .theme-toggle::before {
+        content: '🌙';
+        left: auto;
+        right: 8px;
+      }
+
+      body.dark-mode .theme-toggle::after {
+        transform: translateX(34px);
+        background: #f8fafc;
+      }
+    </style>
     <title>Aula de Bootstrap</title>
   </head>
   <body>
@@ -55,17 +222,19 @@
               </ul>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Digite sua pesquisa"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Pesquisar
-            </button>
-          </form>
+          <div class="navbar-actions">
+            <form class="d-flex align-items-center" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Digite sua pesquisa"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Pesquisar
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </nav>
@@ -73,7 +242,41 @@
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
+    <script>
+      (function () {
+        const STORAGE_KEY = 'bootstrap-theme';
+        const body = document.body;
+        const actionsWrapper = document.querySelector('.navbar-actions');
+
+        if (!actionsWrapper) return;
+
+        const toggleButton = document.createElement('button');
+        toggleButton.type = 'button';
+        toggleButton.className = 'theme-toggle';
+        toggleButton.setAttribute('aria-label', 'Alternar tema');
+        toggleButton.setAttribute('aria-pressed', 'false');
+
+        const applyTheme = function (theme) {
+          const isDark = theme === 'dark';
+          body.classList.toggle('dark-mode', isDark);
+          toggleButton.setAttribute('aria-pressed', String(isDark));
+          toggleButton.title = isDark ? 'Tema escuro ativado' : 'Tema claro ativado';
+          localStorage.setItem(STORAGE_KEY, theme);
+        };
+
+        const preferredTheme =
+          localStorage.getItem(STORAGE_KEY) ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        toggleButton.addEventListener('click', function () {
+          const nextTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+          applyTheme(nextTheme);
+        });
+
+        actionsWrapper.appendChild(toggleButton);
+        applyTheme(preferredTheme);
+      })();
+    </script>
   </body>
 </html>
